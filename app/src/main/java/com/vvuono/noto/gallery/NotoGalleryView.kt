@@ -24,13 +24,7 @@ fun NotoGalleryView() {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             floatingActionButton = {
-                FloatingActionButton(
-                    onClick = { onFloatingActionButtonClick(context) },
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary,
-                ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "New Noto")
-                }
+                NewNotoButton { onFloatingActionButtonClick(context) }
             },
         ) { innerPadding ->
             Greeting(
@@ -51,6 +45,17 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
+}
+
+@Composable
+fun NewNotoButton(onClick: () -> Unit) {
+    FloatingActionButton(
+        onClick = onClick,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+    ) {
+        Icon(imageVector = Icons.Default.Add, contentDescription = "New Noto")
+    }
 }
 
 @Preview(showBackground = true)
