@@ -1,4 +1,4 @@
-package com.vvuono.noto
+package com.vvuono.noto.gallery
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
