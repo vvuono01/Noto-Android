@@ -1,7 +1,5 @@
 package com.vvuono.noto.gallery
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -13,18 +11,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.vvuono.noto.ui.theme.NotoTheme
 
 @Composable
-fun NotoGalleryView() {
+fun NotoGalleryView(
+    viewModel: NotoGalleryViewModel,
+) {
     NotoTheme {
-        val context = LocalContext.current
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             floatingActionButton = {
-                NewNotoButton { onFloatingActionButtonClick(context) }
+                NewNotoButton { viewModel.onNewNotoButtonClicked() }
             },
         ) { innerPadding ->
             Greeting(
@@ -33,10 +31,6 @@ fun NotoGalleryView() {
             )
         }
     }
-}
-
-private fun onFloatingActionButtonClick(context: Context) {
-    Toast.makeText(context, "Make a new Noto!", Toast.LENGTH_SHORT).show()
 }
 
 @Composable
