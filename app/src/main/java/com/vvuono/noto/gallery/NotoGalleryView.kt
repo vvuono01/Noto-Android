@@ -5,39 +5,22 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.vvuono.noto.data.ui.NotoScreen
 
 @Composable
 fun NotoGalleryView() {
-    Greeting(
-        name = "Android",
-    )
+    // TODO: Add Gallery UI
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun NewNotoButton(viewModel: NotoGalleryViewModel) {
+fun NewNotoButton(navController: NavController) {
     FloatingActionButton(
-        onClick = { viewModel.onNewNotoButtonClicked() },
+        onClick = { navController.navigate(NotoScreen.CreateNoto.name) },
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
     ) {
         Icon(imageVector = Icons.Default.Add, contentDescription = "New Noto")
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Greeting("Android")
 }

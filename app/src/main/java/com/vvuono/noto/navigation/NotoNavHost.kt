@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.vvuono.noto.create.CreateNotoView
 import com.vvuono.noto.data.ui.NotoScreen
 import com.vvuono.noto.gallery.NotoGalleryView
 
@@ -20,6 +21,10 @@ fun NotoNavHost(
     ) {
         composable(route = NotoScreen.Gallery.name) {
             NotoGalleryView()
+        }
+
+        composable(route = NotoScreen.CreateNoto.name) {
+            CreateNotoView()
         }
     }
 }

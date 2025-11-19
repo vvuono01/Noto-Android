@@ -4,4 +4,5 @@ import kotlinx.serialization.Serializable
 
 sealed class NotoScreen(val name: String) {
     @Serializable object Gallery : NotoScreen("gallery")
+    @Serializable object CreateNoto : NotoScreen("create_noto")
 }
