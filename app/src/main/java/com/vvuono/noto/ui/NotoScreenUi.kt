@@ -6,11 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.vvuono.noto.create.CreateNotoViewModel
-import com.vvuono.noto.data.ui.NotoScreen
-import com.vvuono.noto.gallery.NewNotoButton
 import com.vvuono.noto.gallery.NotoGalleryViewModel
 import com.vvuono.noto.navigation.NotoNavHost
 
@@ -20,14 +17,7 @@ fun NotoApp(
     createNotoViewModel: CreateNotoViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
-    Scaffold(
-        floatingActionButton = {
-            val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-            if (currentRoute == NotoScreen.Gallery.name) {
-                NewNotoButton(navController)
-            }
-        }
-    ) { innerPadding ->
+    Scaffold { innerPadding ->
         NotoNavHost(
             navController = navController,
             modifier = Modifier.padding(innerPadding),

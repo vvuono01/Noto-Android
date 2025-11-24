@@ -20,7 +20,7 @@ fun NotoNavHost(
         modifier = modifier,
     ) {
         composable(route = NotoScreen.Gallery.name) {
-            NotoGalleryView()
+            NotoGalleryView(navController)
         }
 
         composable(route = NotoScreen.CreateNoto.name) {
