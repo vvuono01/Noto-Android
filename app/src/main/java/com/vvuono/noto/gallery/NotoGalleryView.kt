@@ -1,61 +1,33 @@
 package com.vvuono.noto.gallery
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.vvuono.noto.ui.theme.NotoTheme
+import androidx.navigation.NavController
+import com.vvuono.noto.data.ui.NotoScreen
 
 @Composable
-fun NotoGalleryView(
-    viewModel: NotoGalleryViewModel,
-) {
-    NotoTheme {
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            floatingActionButton = {
-                NewNotoButton { viewModel.onNewNotoButtonClicked() }
-            },
-        ) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
-        }
+fun NotoGalleryView(navController: NavController) {
+    Scaffold(
+        floatingActionButton = {
+            NewNotoButton(navController)
+        },
+    ) { innerPadding ->
+        // TODO: Add Gallery UI
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun NewNotoButton(onClick: () -> Unit) {
+fun NewNotoButton(navController: NavController) {
     FloatingActionButton(
-        onClick = onClick,
+        onClick = { navController.navigate(NotoScreen.CreateNoto.name) },
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
     ) {
         Icon(imageVector = Icons.Default.Add, contentDescription = "New Noto")
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NotoTheme {
-        Greeting("Android")
     }
 }
