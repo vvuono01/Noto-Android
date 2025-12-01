@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.vvuono.noto.create.CreateNotoView
+import com.vvuono.noto.create.CreateNotoViewModel
 import com.vvuono.noto.data.ui.NotoScreen
 import com.vvuono.noto.gallery.NotoGalleryView
 
@@ -18,6 +19,7 @@ private const val TRANSITION_DURATION_MILLIS = 250
 @Composable
 fun NotoNavHost(
     navController: NavHostController,
+    createNotoViewModel: CreateNotoViewModel,
     modifier: Modifier = Modifier,
 ) {
     NavHost(
@@ -54,7 +56,7 @@ fun NotoNavHost(
         }
 
         composable(route = NotoScreen.CreateNoto.name) {
-            CreateNotoView()
+            CreateNotoView(createNotoViewModel)
         }
     }
 }

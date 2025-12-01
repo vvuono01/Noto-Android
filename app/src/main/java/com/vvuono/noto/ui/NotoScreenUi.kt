@@ -20,6 +20,7 @@ fun NotoApp(
     Scaffold { innerPadding ->
         NotoNavHost(
             navController = navController,
+            createNotoViewModel = createNotoViewModel,
             modifier = Modifier.padding(innerPadding),
         )
     }
