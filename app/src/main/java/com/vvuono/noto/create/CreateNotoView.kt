@@ -1,6 +1,5 @@
 package com.vvuono.noto.create
 
-import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
@@ -12,23 +11,34 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun CreateNotoView(
     viewModel: CreateNotoViewModel,
 ) {
-    val newNotoUri by viewModel.newNotoUri.collectAsStateWithLifecycle()
+    val captureImageStatus by viewModel.captureNotoImageStatus.collectAsStateWithLifecycle()
     val takePictureLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture(),
         onResult = { success ->
             if (success) {
-                // TODO: Navigate to ViewNotoView with the saved image
+                (captureImageStatus as? CaptureNotoImageStatus.Pending)?.let {
+                    viewModel.onNotoImageCaptured(it.uri)
+                } ?: viewModel.onNotoImageCaptureFailure(
+                    IllegalStateException(
+                        "captureImageStatus is in incorrect state ($captureImageStatus); can't extract URI"
+                    )
+                )
             } else {
-                // TODO: Handle failed image capture
+                viewModel.onNotoImageCaptureFailure()
             }
         }
     )
 
-    LaunchedEffect(newNotoUri) {
-        if (newNotoUri != Uri.EMPTY) {
-            takePictureLauncher.launch(newNotoUri)
-        } else {
-            viewModel.createNewNotoUri()
+    LaunchedEffect(captureImageStatus) {
+        when (val status = captureImageStatus) {
+            is CaptureNotoImageStatus.Initial -> viewModel.createNewNotoUri()
+            is CaptureNotoImageStatus.Pending -> takePictureLauncher.launch(status.uri)
+            is CaptureNotoImageStatus.Success -> {
+                // TODO: Navigate to ViewNotoView with the saved image
+            }
+            is CaptureNotoImageStatus.Failure -> {
+                // TODO: Handle failed image capture
+            }
         }
     }
 }
