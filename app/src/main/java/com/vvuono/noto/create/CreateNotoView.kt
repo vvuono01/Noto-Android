@@ -1,15 +1,21 @@
 package com.vvuono.noto.create
 
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
+import com.vvuono.noto.R
 
 @Composable
 fun CreateNotoView(
     viewModel: CreateNotoViewModel,
+    navController: NavHostController,
 ) {
     val captureImageStatus by viewModel.captureNotoImageStatus.collectAsStateWithLifecycle()
     val takePictureLauncher = rememberLauncherForActivityResult(
@@ -29,6 +35,7 @@ fun CreateNotoView(
         }
     )
 
+    val context = LocalContext.current
     LaunchedEffect(captureImageStatus) {
         when (val status = captureImageStatus) {
             is CaptureNotoImageStatus.Initial -> viewModel.createNewNotoUri()
@@ -37,7 +44,12 @@ fun CreateNotoView(
                 // TODO: Navigate to ViewNotoView with the saved image
             }
             is CaptureNotoImageStatus.Failure -> {
-                // TODO: Handle failed image capture
+                Toast.makeText(
+                    context,
+                    R.string.create_noto_image_capture_failed,
+                    Toast.LENGTH_SHORT,
+                ).show()
+                navController.popBackStack()
             }
         }
     }

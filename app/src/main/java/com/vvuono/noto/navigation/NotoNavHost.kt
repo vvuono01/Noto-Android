@@ -57,7 +57,10 @@ fun NotoNavHost(
 
         composable(route = NotoScreen.CreateNoto.name) {
             val createNotoViewModel = hiltViewModel<CreateNotoViewModel>()
-            CreateNotoView(createNotoViewModel)
+            CreateNotoView(
+                viewModel = createNotoViewModel,
+                navController = navController,
+            )
         }
     }
 }
