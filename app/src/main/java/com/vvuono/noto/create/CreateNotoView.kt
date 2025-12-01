@@ -6,7 +6,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
@@ -25,12 +24,11 @@ fun CreateNotoView(
         }
     )
 
-    val context = LocalContext.current
     LaunchedEffect(newNotoUri) {
         if (newNotoUri != Uri.EMPTY) {
             takePictureLauncher.launch(newNotoUri)
         } else {
-            viewModel.createNewNotoUri(context)
+            viewModel.createNewNotoUri()
         }
     }
 }
