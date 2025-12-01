@@ -6,6 +6,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,7 +20,6 @@ private const val TRANSITION_DURATION_MILLIS = 250
 @Composable
 fun NotoNavHost(
     navController: NavHostController,
-    createNotoViewModel: CreateNotoViewModel,
     modifier: Modifier = Modifier,
 ) {
     NavHost(
@@ -56,6 +56,7 @@ fun NotoNavHost(
         }
 
         composable(route = NotoScreen.CreateNoto.name) {
+            val createNotoViewModel = hiltViewModel<CreateNotoViewModel>()
             CreateNotoView(createNotoViewModel)
         }
     }
