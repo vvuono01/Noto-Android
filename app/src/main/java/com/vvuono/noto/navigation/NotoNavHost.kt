@@ -40,7 +40,7 @@ private fun createNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NotoScreen.Gallery.name,
+        startDestination = NotoScreen.Gallery(),
         modifier = modifier,
         enterTransition = {
             slideIntoContainer(
@@ -67,15 +67,15 @@ private fun createNavHost(
             )
         }
     ) {
-        composable(route = NotoScreen.Gallery.name) {
+        composable<NotoScreen.Gallery> {
             NotoGalleryView()
         }
 
-        composable(route = NotoScreen.CreateNoto.name) {
+        composable<NotoScreen.CreateNoto> {
             CreateNotoView()
         }
 
-        composable(route = NotoScreen.ViewNoto.name) {
+        composable<NotoScreen.ViewNoto> {
             ViewNotoView()
         }
     }

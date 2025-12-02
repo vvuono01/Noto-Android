@@ -11,16 +11,16 @@ class NotoNavigatorImpl(
     }
 
     override fun navigateToGallery() {
-        navController.navigate(NotoScreen.Gallery.name)
+        navController.navigate(NotoScreen.Gallery())
     }
 
     override fun navigateToCreateNoto() {
-        navController.navigate(NotoScreen.CreateNoto.name)
+        navController.navigate(NotoScreen.CreateNoto())
     }
 
     override fun navigateToViewNoto() {
-        navController.navigate(NotoScreen.ViewNoto.name) {
-            popUpTo(NotoScreen.Gallery.name) {
+        navController.navigate(NotoScreen.ViewNoto()) {
+            popUpTo(NotoScreen.Gallery()) {
                 inclusive = false
             }
         }
