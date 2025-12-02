@@ -1,5 +1,6 @@
 package com.vvuono.noto.navigation
 
+import android.net.Uri
 import androidx.navigation.NavHostController
 import com.vvuono.noto.data.ui.NotoScreen
 
@@ -18,8 +19,8 @@ class NotoNavigatorImpl(
         navController.navigate(NotoScreen.CreateNoto())
     }
 
-    override fun navigateToViewNoto() {
-        navController.navigate(NotoScreen.ViewNoto()) {
+    override fun navigateToViewNoto(notoPhotoUri: Uri) {
+        navController.navigate(NotoScreen.ViewNoto(notoPhotoUri.toString())) {
             popUpTo(NotoScreen.Gallery()) {
                 inclusive = false
             }

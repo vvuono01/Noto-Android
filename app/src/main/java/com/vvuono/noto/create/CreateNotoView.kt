@@ -40,7 +40,7 @@ fun CreateNotoView() {
         when (val status = captureImageStatus) {
             is CaptureNotoImageStatus.Initial -> viewModel.createNewNotoUri()
             is CaptureNotoImageStatus.Pending -> takePictureLauncher.launch(status.uri)
-            is CaptureNotoImageStatus.Success -> navigator.navigateToViewNoto()
+            is CaptureNotoImageStatus.Success -> navigator.navigateToViewNoto(status.uri)
             is CaptureNotoImageStatus.Failure -> {
                 Toast.makeText(
                     context,
