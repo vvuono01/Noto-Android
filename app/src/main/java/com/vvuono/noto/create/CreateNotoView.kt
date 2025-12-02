@@ -10,13 +10,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vvuono.noto.R
-import com.vvuono.noto.navigation.NotoNavigator
+import com.vvuono.noto.navigation.LocalNotoNavigator
 
 @Composable
-fun CreateNotoView(
-    navigator: NotoNavigator,
-    viewModel: CreateNotoViewModel = hiltViewModel(),
-) {
+fun CreateNotoView() {
+    val viewModel: CreateNotoViewModel = hiltViewModel()
+
     val captureImageStatus by viewModel.captureNotoImageStatus.collectAsStateWithLifecycle()
     val takePictureLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture(),
@@ -36,6 +35,7 @@ fun CreateNotoView(
     )
 
     val context = LocalContext.current
+    val navigator = LocalNotoNavigator.current
     LaunchedEffect(captureImageStatus) {
         when (val status = captureImageStatus) {
             is CaptureNotoImageStatus.Initial -> viewModel.createNewNotoUri()

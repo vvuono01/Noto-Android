@@ -7,13 +7,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import com.vvuono.noto.navigation.NotoNavigator
+import com.vvuono.noto.navigation.LocalNotoNavigator
 
 @Composable
-fun NotoGalleryView(navigator: NotoNavigator) {
+fun NotoGalleryView() {
     Scaffold(
         floatingActionButton = {
-            NewNotoButton(navigator)
+            NewNotoButton()
         },
     ) { innerPadding ->
         // TODO: Add Gallery UI
@@ -21,7 +21,8 @@ fun NotoGalleryView(navigator: NotoNavigator) {
 }
 
 @Composable
-fun NewNotoButton(navigator: NotoNavigator) {
+fun NewNotoButton() {
+    val navigator = LocalNotoNavigator.current
     FloatingActionButton(
         onClick = { navigator.navigateToCreateNoto() },
         containerColor = MaterialTheme.colorScheme.primary,
