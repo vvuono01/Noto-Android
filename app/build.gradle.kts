@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
 }
@@ -58,6 +59,7 @@ dependencies {
     implementation(libs.android.hilt)
     ksp(libs.android.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.coil.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

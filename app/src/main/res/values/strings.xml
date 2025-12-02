@@ -1,3 +1,7 @@
 <resources>
+    <!-- Common strings -->
     <string name="app_name">Noto</string>
+
+    <!-- Create Noto -->
+    <string name="create_noto_image_capture_failed">No Noto image captured.</string>
 </resources>
