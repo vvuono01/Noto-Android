@@ -7,14 +7,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import com.vvuono.noto.data.ui.NotoScreen
+import com.vvuono.noto.navigation.NotoNavigator
 
 @Composable
-fun NotoGalleryView(navController: NavController) {
+fun NotoGalleryView(navigator: NotoNavigator) {
     Scaffold(
         floatingActionButton = {
-            NewNotoButton(navController)
+            NewNotoButton(navigator)
         },
     ) { innerPadding ->
         // TODO: Add Gallery UI
@@ -22,9 +21,9 @@ fun NotoGalleryView(navController: NavController) {
 }
 
 @Composable
-fun NewNotoButton(navController: NavController) {
+fun NewNotoButton(navigator: NotoNavigator) {
     FloatingActionButton(
-        onClick = { navController.navigate(NotoScreen.CreateNoto.name) },
+        onClick = { navigator.navigateToCreateNoto() },
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
     ) {

@@ -9,13 +9,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import com.vvuono.noto.R
-import com.vvuono.noto.data.ui.NotoScreen
+import com.vvuono.noto.navigation.NotoNavigator
 
 @Composable
 fun CreateNotoView(
-    navController: NavHostController,
+    navigator: NotoNavigator,
     viewModel: CreateNotoViewModel = hiltViewModel(),
 ) {
     val captureImageStatus by viewModel.captureNotoImageStatus.collectAsStateWithLifecycle()
@@ -41,20 +40,14 @@ fun CreateNotoView(
         when (val status = captureImageStatus) {
             is CaptureNotoImageStatus.Initial -> viewModel.createNewNotoUri()
             is CaptureNotoImageStatus.Pending -> takePictureLauncher.launch(status.uri)
-            is CaptureNotoImageStatus.Success -> {
-                navController.navigate(NotoScreen.ViewNoto.name) {
-                    popUpTo(NotoScreen.Gallery.name) {
-                        inclusive = false
-                    }
-                }
-            }
+            is CaptureNotoImageStatus.Success -> navigator.navigateToViewNoto()
             is CaptureNotoImageStatus.Failure -> {
                 Toast.makeText(
                     context,
                     R.string.create_noto_image_capture_failed,
                     Toast.LENGTH_SHORT,
                 ).show()
-                navController.popBackStack()
+                navigator.popBackStack()
             }
         }
     }

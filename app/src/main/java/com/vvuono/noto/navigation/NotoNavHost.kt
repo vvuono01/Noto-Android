@@ -21,6 +21,7 @@ fun NotoNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
+    val navigator: NotoNavigator = NotoNavigatorImpl(navController)
     NavHost(
         navController = navController,
         startDestination = NotoScreen.Gallery.name,
@@ -51,11 +52,11 @@ fun NotoNavHost(
         }
     ) {
         composable(route = NotoScreen.Gallery.name) {
-            NotoGalleryView(navController)
+            NotoGalleryView(navigator)
         }
 
         composable(route = NotoScreen.CreateNoto.name) {
-            CreateNotoView(navController)
+            CreateNotoView(navigator)
         }
 
         composable(route = NotoScreen.ViewNoto.name) {
